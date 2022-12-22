@@ -152,35 +152,46 @@ public class dauminos {
 			choice = input.nextInt();
 		}
 		
+		choice--;
+		
 		if (player.hand.get(choice).back == player.hand.get(choice).front && doub.back == 3 && doub.front == 2)
 			doub = player.hand.get(choice);
 		
 	//	System.out.print(doub.back + "|" + doub.front);  qosanin gosterilmesi
 		
-		
+		System.out.println(player.hand.get(choice).back + "|" + player.hand.get(choice).front);  
 		if (isValid(player.hand.get(choice)))
 			putTable(player, player.hand.get(choice));
 	}
 	
 	public static void printBoard() {
-		
+		System.out.println("-------------------------");
+		for (int i = 0; i < tableHorizontal.size(); i++) {
+			System.out.println(tableHorizontal.get(i).back + "|" + tableHorizontal.get(i).front);
+		}
+		System.out.println("-------------------------");
+
 	}
 	
 	public static boolean isValid(domino domino) {
-		if (tableHorizontal.size() == 0) {
-			System.out.println("Valid Ild Das");
-			return true;
-		}	else if (domino.back == tableHorizontal.get(0).back || 
-				domino.front == tableHorizontal.get(tableHorizontal.size()-1).front ||
-				domino.back == tableVertical.get(0).back ||
-				domino.front == tableVertical.get(tableVertical.size()-1).front ||
-				domino.back == tableHorizontal.get(tableHorizontal.size()-1).front ||
-				domino.back == tableVertical.get(tableVertical.size()-1).front ||
-				domino.front == tableHorizontal.get(0).back ||
-				domino.front == tableVertical.get(0).back) {
-			System.out.println("ValidValidValid");
+ 		if (tableHorizontal.size() == 0 || tableVertical.size() == 0) {
+			System.out.println("Ilk Das");
 			return true;
 		}
+		
+		if (tableVertical.size() > 0) {
+			System.out.println("4 terefe bax");
+		} else {
+			if (
+				domino.back == tableHorizontal.get(0).back ||
+				domino.back == tableHorizontal.get(tableHorizontal.size()-1).front ||
+				domino.front == tableHorizontal.get(0).back ||
+				domino.front == tableHorizontal.get(tableHorizontal.size()-1).front
+					)
+				return true;
+		}
+		
+		
 		return false;
 	}
 	
@@ -195,5 +206,7 @@ public class dauminos {
 				tableVertical.add(domino);
 			//if ()
 		}
+		
+		printBoard();
 	} 
 }
